@@ -5,7 +5,7 @@ import numpy as np
 import os
 import cv2,imutils
 
-st.write('R204452G Tungamiraishe Mukwena')
+st.text("IMAGE CAPTIONING : Stany Ganyani R204442S")
 
 # Frames path
 FRAMES = join(dirname(realpath(__file__)), "frames")
