@@ -11,6 +11,9 @@ import os
 import cv2
 import imutils
 
+# Frames path
+FRAMES = join(dirname(realpath(__file__)), "frames")
+
 # Loading images to frontend
 def load_image(image_file):
 	img = Image.open(image_file)
@@ -47,7 +50,12 @@ if(video is not None):
     # Create frames for the video and save 
     def create_frames():
         st.write('Creating frames')
+
+        # Create frames directory
+        os.makedirs(FRAMES)
+
         images_array = []
+        
         cap = cv2.VideoCapture(video.name)
         index = 0
 
