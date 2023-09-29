@@ -1,4 +1,5 @@
 import streamlit as st 
+from PIL import Image
 from os.path import join, dirname, realpath
 from glob import glob
 import numpy as np
