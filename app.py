@@ -16,10 +16,7 @@ def load_image(image_file):
 	img = Image.open(image_file)
 	return img
 
-st.text("Stany Ganyani R204442S")
-
-# User search query
-search_query = st.text_input("enter object to query", "search query",key="search_query" )
+st.text("IMAGE CAPTIONING : Stany Ganyani R204442S")
 
 # Allow user to upload video
 video = st.file_uploader(label="upload video", type="mp4", key="video_upload_file")
@@ -27,27 +24,29 @@ video = st.file_uploader(label="upload video", type="mp4", key="video_upload_fil
 # Continue only if video is uploaded successfully
 if(video is not None):
     # Notify user
-    st.text("video has been uploaded")
+    st.text("Video has been uploaded")
     # Gather video meta data
-    file_details = {"filename":video.name, "filetype":video.type,
-                    "filesize":video.size}
+    file_details = {
+        "filename":video.name, 
+        "filetype":video.type,
+        "filesize":video.size
+    }
     # Show on ui
     st.write(file_details)
     # save video
     with open(video.name, "wb") as f:
         f.write(video.getbuffer())
     # Notify user
-    st.success("file saved")
+    st.success("Video saved")
 
     # Show video on ui 
     video_file = open(file_details['filename'], 'rb')
     video_bytes = video_file.read()
     st.video(video_bytes)
 
-    st.write('uploaded video right now')
-
     # Create frames for the video and save 
     def create_frames():
+        st.write('Creating frames')
         images_array = []
         cap = cv2.VideoCapture(video.name)
         index = 0
@@ -71,14 +70,12 @@ if(video is not None):
 
             index += 1
         return np.array(images_array)
-    
 
-    # Create frames
-    # create_frames()
+    # Invoke Function to create frames
     images_array = create_frames()
 
     # Continue only if frames have been successfully created 
     if len(images_array) > 0:
         frame_paths = glob(f"frames/*.jpeg")
         for path in frame_paths:
-            st.image(load_image(path),width=250)
+            st.image(load_image(path), width=250)
