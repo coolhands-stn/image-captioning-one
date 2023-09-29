@@ -6,6 +6,8 @@ import numpy as np
 import os
 import cv2,imutils
 
+from transformers import GPT2TokenizerFast, ViTImageProcessor, VisionEncoderDecoderModel
+
 st.text("IMAGE CAPTIONING : Stany Ganyani R204442S")
 
 # Frames path
