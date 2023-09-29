@@ -76,8 +76,34 @@ if(video is not None):
     images_array = create_frames()
 
     # Continue only if frames have been successfully created 
+    # if len(images_array) > 0:
+    #     frame_paths = glob(f"frames/*.jpeg")
+    #     for path in frame_paths:
+    #         st.image(load_image(path), width=250)
+
+    def generate_caption(image_path):
+        # Loading the model and it's helper components
+        model_raw = VisionEncoderDecoderModel.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+        image_processor = ViTImageProcessor.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+        tokenizer = GPT2TokenizerFast.from_pretrained("nlpconnect/vit-gpt2-image-captioning")
+
+        image = Image.open(image_path)
+        pixel_values   = image_processor(image, return_tensors ="pt").pixel_values
+
+        generated_ids  = model.generate(
+            pixel_values,
+            do_sample=True,
+            max_new_tokens = 30,
+            top_k=5
+        )
+        generated_text = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)[0]
+        st.write(generated_text)
+
+    
     if len(images_array) > 0:
         frame_paths = glob(f"frames/*.jpeg")
         for path in frame_paths:
             st.image(load_image(path), width=250)
+            caption = generate_caption(path)
+            break
 
