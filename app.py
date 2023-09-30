@@ -25,7 +25,7 @@ if(video is not None):
     # Remove pre-existing FRAMES dir
     if os.path.exists(FRAMES):
         os.rmdir(FRAMES)
-	st.write('Removed pre-exisiting frames dir')
+        st.write('Removed pre-exisiting frames dir')
 	    
     # Notify user
     st.text("Video has been uploaded")
