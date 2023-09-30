@@ -90,7 +90,7 @@ if(video is not None):
         image = Image.open(image_path)
         pixel_values   = image_processor(image, return_tensors ="pt").pixel_values
 
-        generated_ids  = model.generate(
+        generated_ids  = model_raw.generate(
             pixel_values,
             do_sample=True,
             max_new_tokens = 30,
