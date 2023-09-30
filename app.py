@@ -24,6 +24,10 @@ video = st.file_uploader(label="upload video", type="mp4", key="video_upload_fil
 if(video is not None):
     # Remove pre-existing FRAMES dir
     if os.path.exists(FRAMES):
+        frame_paths = glob(f"frames/*.jpeg")
+        # Remove every file
+        for path in frame_paths:
+            os.remove(path)
         os.rmdir(FRAMES)
         st.write('Removed pre-exisiting frames dir')
 	    
