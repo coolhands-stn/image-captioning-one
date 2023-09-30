@@ -22,6 +22,11 @@ video = st.file_uploader(label="upload video", type="mp4", key="video_upload_fil
 
 # Continue only if video is uploaded successfully
 if(video is not None):
+    # Remove pre-existing FRAMES dir
+    if os.path.exists(FRAMES):
+        os.rmdir(FRAMES)
+	st.write('Removed pre-exisiting frames dir')
+	    
     # Notify user
     st.text("Video has been uploaded")
     # Gather video meta data
@@ -45,7 +50,7 @@ if(video is not None):
     def create_frames():
 
         # Create frames directory
-        # os.makedirs(FRAMES)
+        os.makedirs(FRAMES)
 
         images_array = []
 
