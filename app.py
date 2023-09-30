@@ -45,7 +45,7 @@ if(video is not None):
     def create_frames():
 
         # Create frames directory
-        os.makedirs(FRAMES)
+        # os.makedirs(FRAMES)
 
         images_array = []
 
